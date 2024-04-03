@@ -17,17 +17,11 @@ stages:
       vmImage: ubuntu-latest
     steps:
     - task: Docker@2
-      displayName: Build an image
-      inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-        tags: |
-          $(tag)
-    - task: Docker@2
       displayName: Push an image
       inputs:
         containerRegistry: 'docker connection' # This should match the name of your Docker service connection
-        repository: 'suraj123456789'
-        command: 'push'
+        repository: 'suraj123456789/demodckreg'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
         tags: |
           $(tag)
